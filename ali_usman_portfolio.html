@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ali Usman — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0f0e0d;
+    --paper: #f5f2ed;
+    --accent: #c8601a;
+    --muted: #7a7060;
+    --border: #ddd8cf;
+    --card: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  header {
+    padding: 80px 40px 60px;
+    max-width: 900px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 7vw, 72px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+  }
+
+  .tagline {
+    font-size: 18px;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 480px;
+    margin-bottom: 36px;
+  }
+
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .contact-row a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .contact-row a:hover { text-decoration: underline; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    background: rgba(245, 242, 237, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    padding: 0 40px;
+  }
+
+  nav ul {
+    display: flex;
+    list-style: none;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  nav a {
+    display: block;
+    padding: 16px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--accent); }
+
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px 100px;
+  }
+
+  section { padding-top: 70px; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .project-card {
+    background: var(--card);
+    padding: 36px 32px;
+    transition: background 0.2s;
+  }
+
+  .project-card:hover { background: #fdfbf8; }
+
+  .project-type {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .project-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+
+  .project-card p {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .achievement {
+    font-size: 13px;
+    color: var(--ink);
+    background: #f5f2ed;
+    border-left: 3px solid var(--accent);
+    padding: 10px 14px;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    transition: gap 0.2s;
+  }
+
+  .project-link:hover { gap: 10px; }
+  .project-link::after { content: '→'; }
+
+  .articles-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+  }
+
+  .article-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 20px;
+    padding: 28px 32px;
+    border-bottom: 1px solid var(--border);
+    background: var(--card);
+    transition: background 0.2s;
+  }
+
+  .article-item:last-child { border-bottom: none; }
+  .article-item:hover { background: #fdfbf8; }
+
+  .article-focus {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .article-item h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .article-item p {
+    font-size: 13px;
+    color: var(--muted);
+    max-width: 520px;
+  }
+
+  .article-link {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    white-space: nowrap;
+    padding-top: 4px;
+  }
+
+  .article-link:hover { text-decoration: underline; }
+  .article-link::after { content: '→'; }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .skill-block {
+    background: var(--card);
+    padding: 28px 24px;
+  }
+
+  .skill-block h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .skill-block ul {
+    list-style: none;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 2;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 640px) {
+    header, nav, main, footer { padding-left: 20px; padding-right: 20px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .article-item { grid-template-columns: 1fr; }
+    nav ul { overflow-x: auto; }
+    nav a { padding: 14px 12px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Content Writer and SEO Strategist</p>
+  <h1>Ali Usman</h1>
+  <p class="tagline">Strategic Content and Copy. From SaaS to Supplements.</p>
+  <div class="contact-row">
+    <span>✉ <a href="mailto:tslmau047@gmail.com">tslmau047@gmail.com</a></span>
+    <span>☎ +92-335-9143175</span>
+    <span>&#x1F4CD; Islamabad, Pakistan</span>
+  </div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#websites">Website Copy</a></li>
+    <li><a href="#seo">SEO Content</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section id="websites">
+    <p class="section-label">Website Copy and Brand Identity</p>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <p class="project-type">Health and E-commerce</p>
+        <h3>NAD+ Plus Life</h3>
+        <p>Translated complex supplement science into approachable, trust-driven copy while balancing medical authority with lifestyle benefits.</p>
+        <div class="achievement">Secured Google Merchant Center approval in a regulated wellness and supplement industry.</div>
+        <a class="project-link" href="https://nadpluslife.co.uk/" target="_blank">View Project</a>
+      </div>
+
+      <div class="project-card">
+        <p class="project-type">Marketing Agency</p>
+        <h3>Media Mace</h3>
+        <p>Crafted a punchy, digital-first tone for a marketing agency. Authoritative language that speaks directly to business owners seeking growth.</p>
+        <a class="project-link" href="https://mediamace.com/" target="_blank">View Project</a>
+      </div>
+
+      <div class="project-card">
+        <p class="project-type">Technical SaaS</p>
+        <h3>BelloFOS</h3>
+        <p>Simplified complex restaurant management software and API integrations. Jargon-free copy that makes the value proposition immediate for the end-user.</p>
+        <a class="project-link" href="https://bellofos.com/" target="_blank">View Project</a>
+      </div>
+
+      <div class="project-card">
+        <p class="project-type">Professional Services</p>
+        <h3>Quick Zone Solutions</h3>
+        <p>Developed a professional, reliable voice for the construction sector. Copy designed to build immediate trust and highlight operational efficiency.</p>
+        <a class="project-link" href="https://quickzonesolutions.com/" target="_blank">View Project</a>
+      </div>
+
+      <div class="project-card">
+        <p class="project-type">Community and Institutional</p>
+        <h3>Suffatul Islam Luton</h3>
+        <p>Community-centric, accessible communication for a UK-based Islamic institution. Warm, inclusive tone for a diverse local audience.</p>
+        <a class="project-link" href="https://suffatulislamluton.co.uk/" target="_blank">View Project</a>
+      </div>
+
+      <div class="project-card">
+        <p class="project-type">Political and Institutional</p>
+        <h3>All JK Muslim Conference</h3>
+        <p>Formal, institutional messaging for a political and community organization. Copy that conveys authority and represents a serious public mandate.</p>
+        <a class="project-link" href="https://alljkmuslimconference.com/" target="_blank">View Project</a>
+      </div>
+
+      <div class="project-card">
+        <p class="project-type">Home Improvement</p>
+        <h3>Buon Construction</h3>
+        <p>High-value conversion copy for kitchen renovation services. Designed to qualify leads and push high-intent visitors toward enquiry.</p>
+        <a class="project-link" href="https://buonconstruction.com/kitchen-renovation-nottingham/" target="_blank">View Project</a>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="seo">
+    <p class="section-label">SEO and Editorial Content</p>
+    <div class="articles-list">
+
+      <div class="article-item">
+        <div>
+          <p class="article-focus">Legal and High-EEAT Writing</p>
+          <h3>How to Apply for an Asylum Travel Document in the UK</h3>
+          <p>Precise and authoritative writing on a sensitive regulatory subject for MSD Solicitors. Demonstrates handling of complex legal requirements with clarity.</p>
+        </div>
+        <a class="article-link" href="https://www.msdsolicitors.co.uk/post/asylum-travel-document-uk" target="_blank">Read Article</a>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <p class="article-focus">Technical Guide</p>
+          <h3>Everything You Need to Know Before You Install a Body Kit</h3>
+          <p>Simplified a technical automotive process for enthusiasts at KSB Autostyling. Structured formatting and readability at the forefront.</p>
+        </div>
+        <a class="article-link" href="https://ksbautostyling.co.uk/blogs/news/install-a-body-kit" target="_blank">Read Article</a>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <p class="article-focus">Data-Driven SEO</p>
+          <h3>How Much Does it Cost to Build a Bungalow in the UK?</h3>
+          <p>Translated market cost data into a comprehensive guide for Buon Construction to capture high-intent search traffic.</p>
+        </div>
+        <a class="article-link" href="https://buonconstruction.com/cost-to-build-bungalow/" target="_blank">Read Article</a>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <p class="article-focus">Competitive Local SEO</p>
+          <h3>Best Takeaway in Beeston: Why Chicken Licious Wins</h3>
+          <p>Dominated local search for Chicken Licious through bold storytelling aligned with Google's Helpful Content standards.</p>
+        </div>
+        <a class="article-link" href="https://chickenliciousshop.co.uk/best-takeaway-in-beeston/" target="_blank">Read Article</a>
+      </div>
+
+      <div class="article-item">
+        <div>
+          <p class="article-focus">Retail and Fashion</p>
+          <h3>Summer Fashion Trends for Kids</h3>
+          <p>Trend-focused copy for PCZ Designerwear designed to drive seasonal engagement and sales through timely, search-optimized content.</p>
+        </div>
+        <a class="article-link" href="https://pczdesignerwear.co.uk/blogs/news/kids-summer-clothes" target="_blank">Read Article</a>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="skills">
+    <p class="section-label">Core Competencies</p>
+    <div class="skills-grid">
+      <div class="skill-block">
+        <h4>Content Strategy</h4>
+        <ul>
+          <li>SEO and AEO Writing</li>
+          <li>Technical Writing</li>
+          <li>Scriptwriting</li>
+          <li>Editorial Planning</li>
+        </ul>
+      </div>
+      <div class="skill-block">
+        <h4>Copywriting</h4>
+        <ul>
+          <li>Landing Pages</li>
+          <li>Service Pages</li>
+          <li>Product Descriptions</li>
+          <li>Ad Copy</li>
+        </ul>
+      </div>
+      <div class="skill-block">
+        <h4>SEO and Optimization</h4>
+        <ul>
+          <li>Keyword Research</li>
+          <li>On-Page SEO</li>
+          <li>Off-Page and Link Building</li>
+          <li>Google Search Console</li>
+        </ul>
+      </div>
+      <div class="skill-block">
+        <h4>Tools</h4>
+        <ul>
+          <li>Ahrefs / SEMrush</li>
+          <li>SurferSEO / Clearscope</li>
+          <li>WordPress / CMS</li>
+          <li>ChatGPT / Claude / Gemini</li>
+        </ul>
+      </div>
+      <div class="skill-block">
+        <h4>Industries</h4>
+        <ul>
+          <li>Health and Supplements</li>
+          <li>SaaS and Tech</li>
+          <li>Legal and Institutional</li>
+          <li>Construction and Home</li>
+        </ul>
+      </div>
+      <div class="skill-block">
+        <h4>Additional</h4>
+        <ul>
+          <li>Proofreading and Editing</li>
+          <li>Social Media Management</li>
+          <li>Affiliate Marketing</li>
+          <li>AI-Assisted Production</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <p style="margin-bottom:8px; font-family:'Playfair Display',serif; font-size:18px; color:#0f0e0d;">Available for freelance and full-time work.</p>
+  <p><a href="mailto:tslmau047@gmail.com">tslmau047@gmail.com</a> &nbsp;·&nbsp; +92-335-9143175</p>
+</footer>
+
+</body>
+</html>
