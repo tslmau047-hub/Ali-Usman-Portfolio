@@ -9,20 +9,22 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --navy: #0d1b2a;
-    --navy-light: #162436;
-    --navy-mid: #1e3a5f;
-    --gold: #f0a500;
-    --gold-light: #ffd166;
-    --white: #f5f0e8;
-    --muted: #8a99aa;
-    --border: #1e3a5f;
+    --black: #0a0a0a;
+    --charcoal: #1c1c1e;
+    --charcoal-light: #2a2a2e;
+    --navy: #1a2744;
+    --navy-light: #243358;
+    --accent: #4a7fa5;
+    --accent-light: #6fa3c8;
+    --white: #f0eeeb;
+    --muted: #7a7a82;
+    --border: #2a2a2e;
   }
 
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--navy);
+    background: var(--black);
     color: var(--white);
     font-family: 'DM Sans', sans-serif;
     font-weight: 300;
@@ -38,6 +40,7 @@
     grid-template-columns: 1fr auto;
     align-items: end;
     gap: 40px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--black) 60%);
     position: relative;
     overflow: hidden;
   }
@@ -45,11 +48,8 @@
   header::before {
     content: '';
     position: absolute;
-    top: -100px;
-    right: -100px;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(240,165,0,0.08) 0%, transparent 70%);
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at top right, rgba(74,127,165,0.15) 0%, transparent 60%);
     pointer-events: none;
   }
 
@@ -60,9 +60,10 @@
     line-height: 1;
     letter-spacing: -0.02em;
     color: var(--white);
+    position: relative;
   }
 
-  .name span { color: var(--gold); }
+  .name span { color: var(--accent-light); }
 
   .tagline {
     margin-top: 16px;
@@ -70,6 +71,7 @@
     color: var(--muted);
     font-weight: 400;
     max-width: 500px;
+    position: relative;
   }
 
   .contact-row {
@@ -79,28 +81,31 @@
     gap: 24px;
     font-size: 0.85rem;
     color: var(--muted);
+    position: relative;
   }
 
   .contact-row a {
-    color: var(--gold);
+    color: var(--accent-light);
     text-decoration: none;
     border-bottom: 1px solid transparent;
     transition: border-color 0.2s;
   }
 
-  .contact-row a:hover { border-color: var(--gold); }
+  .contact-row a:hover { border-color: var(--accent-light); }
 
   .header-badge {
-    background: var(--gold);
-    color: var(--navy);
+    background: var(--navy);
+    border: 1px solid var(--navy-light);
+    color: var(--white);
     padding: 20px 24px;
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    line-height: 1.8;
+    letter-spacing: 0.14em;
+    line-height: 1.9;
     min-width: 160px;
     text-align: center;
-    font-weight: 700;
+    font-weight: 500;
+    position: relative;
   }
 
   /* SECTIONS */
@@ -110,10 +115,10 @@
   }
 
   .section-label {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--gold);
+    letter-spacing: 0.22em;
+    color: var(--accent-light);
     font-weight: 500;
     margin-bottom: 44px;
     display: flex;
@@ -130,48 +135,53 @@
   }
 
   /* PROJECTS GRID */
-  .projects-grid {
+  .projects-grid { /* 3 col fixed */
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1px;
     background: var(--border);
     border: 1px solid var(--border);
   }
 
   .project-card {
-    background: var(--navy-light);
+    background: var(--charcoal);
     padding: 32px 28px;
     transition: background 0.25s;
     position: relative;
     overflow: hidden;
   }
 
-  .project-card::after {
+  .project-card::before {
     content: '';
     position: absolute;
-    bottom: 0; left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--gold);
-    transition: width 0.4s ease;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, var(--navy), var(--accent));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
   }
 
-  .project-card:hover { background: #1a2d42; }
-  .project-card:hover::after { width: 100%; }
+  .project-card:hover { background: var(--charcoal-light); }
+
+  .project-card:last-child { grid-column: 1 / -1; }
+  .project-card:hover::before { transform: scaleX(1); }
+
+  
 
   .project-tag {
-    font-size: 0.68rem;
+    font-size: 0.67rem;
     text-transform: uppercase;
     letter-spacing: 0.14em;
-    color: var(--gold);
+    color: var(--accent-light);
     font-weight: 500;
     margin-bottom: 10px;
-    opacity: 0.8;
+    opacity: 0.85;
   }
 
   .project-name {
     font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     font-weight: 700;
     line-height: 1.3;
     margin-bottom: 10px;
@@ -179,36 +189,36 @@
   }
 
   .project-strategy {
-    font-size: 0.86rem;
+    font-size: 0.85rem;
     color: var(--muted);
     line-height: 1.75;
     margin-bottom: 18px;
   }
 
   .project-achievement {
-    font-size: 0.82rem;
+    font-size: 0.81rem;
     color: var(--white);
-    background: rgba(240,165,0,0.08);
+    background: rgba(74,127,165,0.1);
     padding: 11px 14px;
-    border-left: 2px solid var(--gold);
+    border-left: 2px solid var(--accent);
     margin-bottom: 18px;
-    line-height: 1.6;
+    line-height: 1.65;
   }
 
   .project-link {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.8rem;
-    color: var(--gold);
+    font-size: 0.79rem;
+    color: var(--accent-light);
     text-decoration: none;
     font-weight: 500;
     letter-spacing: 0.04em;
-    border-bottom: 1px solid rgba(240,165,0,0.3);
+    border-bottom: 1px solid rgba(111,163,200,0.3);
     transition: border-color 0.2s;
   }
 
-  .project-link:hover { border-color: var(--gold); }
+  .project-link:hover { border-color: var(--accent-light); }
   .project-link::after { content: '->'; }
 
   /* ARTICLES */
@@ -231,7 +241,7 @@
   }
 
   .article-row:last-child { border-bottom: none; }
-  .article-row:hover { background: var(--navy-light); }
+  .article-row:hover { background: var(--charcoal); }
 
   .article-num {
     font-family: 'Playfair Display', serif;
@@ -242,17 +252,17 @@
   }
 
   .article-focus {
-    font-size: 0.68rem;
+    font-size: 0.67rem;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    color: var(--gold);
+    color: var(--accent-light);
     font-weight: 500;
     margin-bottom: 3px;
-    opacity: 0.8;
+    opacity: 0.85;
   }
 
   .article-title {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     color: var(--white);
     line-height: 1.4;
   }
@@ -265,7 +275,7 @@
 
   .article-row:hover .article-arrow {
     transform: translateX(5px);
-    color: var(--gold);
+    color: var(--accent-light);
   }
 
   /* FOOTER */
@@ -276,13 +286,15 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 16px;
+    background: var(--charcoal);
+    border-top: 1px solid var(--border);
   }
 
   .footer-name {
     font-family: 'Playfair Display', serif;
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--gold);
+    color: var(--accent-light);
   }
 
   .footer-copy { font-size: 0.78rem; color: var(--muted); }
@@ -290,7 +302,7 @@
   @media (max-width: 600px) {
     header { grid-template-columns: 1fr; }
     .header-badge { display: none; }
-    .projects-grid { grid-template-columns: 1fr; }
+    .projects-grid { /* 3 col fixed */ grid-template-columns: 1fr; }
     .article-row { gap: 14px; padding: 18px 20px; }
   }
 </style>
@@ -375,7 +387,7 @@
       <div class="article-num">01</div>
       <div class="article-info">
         <div class="article-focus">Legal · High-EEAT Writing</div>
-        <div class="article-title">How to Apply for an Asylum Travel Document in the UK — MSD Solicitors</div>
+        <div class="article-title">How to Apply for an Asylum Travel Document in the UK - MSD Solicitors</div>
       </div>
       <div class="article-arrow">-></div>
     </a>
@@ -384,7 +396,7 @@
       <div class="article-num">02</div>
       <div class="article-info">
         <div class="article-focus">Technical Guide · Automotive</div>
-        <div class="article-title">Everything You Need to Know Before You Install a Body Kit — KSB Autostyling</div>
+        <div class="article-title">Everything You Need to Know Before You Install a Body Kit - KSB Autostyling</div>
       </div>
       <div class="article-arrow">-></div>
     </a>
@@ -393,7 +405,7 @@
       <div class="article-num">03</div>
       <div class="article-info">
         <div class="article-focus">Data-Driven SEO · Construction</div>
-        <div class="article-title">How Much Does it Cost to Build a Bungalow in the UK? — Buon Construction</div>
+        <div class="article-title">How Much Does it Cost to Build a Bungalow in the UK? - Buon Construction</div>
       </div>
       <div class="article-arrow">-></div>
     </a>
@@ -402,7 +414,7 @@
       <div class="article-num">04</div>
       <div class="article-info">
         <div class="article-focus">Competitive Local SEO · Food &amp; Hospitality</div>
-        <div class="article-title">Best Takeaway in Beeston: Why Chicken Licious Wins — Chicken Licious</div>
+        <div class="article-title">Best Takeaway in Beeston: Why Chicken Licious Wins - Chicken Licious</div>
       </div>
       <div class="article-arrow">-></div>
     </a>
@@ -411,7 +423,7 @@
       <div class="article-num">05</div>
       <div class="article-info">
         <div class="article-focus">Retail &amp; Fashion · Seasonal Content</div>
-        <div class="article-title">Summer Fashion Trends for Kids — PCZ Designerwear</div>
+        <div class="article-title">Summer Fashion Trends for Kids - PCZ Designerwear</div>
       </div>
       <div class="article-arrow">-></div>
     </a>
